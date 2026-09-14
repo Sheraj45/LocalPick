@@ -1,5 +1,5 @@
 const express = require("express");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 const protect = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadMiddleware");
 const cloudinary = require("../config/cloudinary");

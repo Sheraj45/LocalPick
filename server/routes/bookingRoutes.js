@@ -1,7 +1,7 @@
 const express = require("express");
 const Booking = require("../models/booking");
 const Order = require("../models/order");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 const Customer = require("../models/customer");
 
 const protect = require("../middleware/authMiddleware");
