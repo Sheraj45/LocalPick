@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import API_URL from "../api";
 
 function CustomerLogin() {
   const [phone, setPhone] = useState("");
@@ -29,19 +30,16 @@ function CustomerLogin() {
     setIsLoggingIn(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/customers/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            phone,
-            password,
-          }),
+      const response = await fetch(`${API_URL}/api/customers/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          phone,
+          password,
+        }),
+      });
 
       const data = await response.json();
 

@@ -6,6 +6,7 @@ import {
   clearCart,
 } from "../cart";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function Cart() {
   const [cart, setCart] = useState(() => getCart());
@@ -49,7 +50,7 @@ function Cart() {
     setIsBooking(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

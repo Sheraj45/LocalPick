@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCart } from "../cart";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import API_URL from "../api";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -22,9 +23,7 @@ function ProductDetails() {
       setProductError("");
 
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/products/${id}`,
-        );
+        const response = await fetch(`${API_URL}/api/products/${id}`);
 
         const data = await response.json();
 
@@ -131,7 +130,7 @@ function ProductDetails() {
     setIsBooking(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

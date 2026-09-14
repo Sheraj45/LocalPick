@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function CustomerBookings() {
   const [customer, setCustomer] = useState(null);
@@ -26,10 +27,10 @@ function CustomerBookings() {
         };
 
         const [customerResponse, ordersResponse] = await Promise.all([
-          fetch("http://localhost:5000/api/customers/me", {
+          fetch(`${API_URL}/api/customers/me`, {
             headers,
           }),
-          fetch("http://localhost:5000/api/bookings/orders/my", {
+          fetch(`${API_URL}/api/bookings/orders/my`, {
             headers,
           }),
         ]);

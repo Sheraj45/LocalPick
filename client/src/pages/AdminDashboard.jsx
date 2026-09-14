@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function AdminDashboard() {
   const [bookings, setBookings] = useState([]);
@@ -85,7 +86,7 @@ function AdminDashboard() {
         formData.append("image", image);
       }
 
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +139,7 @@ function AdminDashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/products/${editingProductId}`,
+        `${API_URL}/api/products/${editingProductId}`,
         {
           method: "PUT",
           headers: {
@@ -182,15 +183,12 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const response = await fetch(
-        `http://localhost:5000/api/products/${productId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await fetch(`${API_URL}/api/products/${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       const data = await response.json();
 
@@ -223,16 +221,13 @@ function AdminDashboard() {
       formData.append("description", product.description || "");
       formData.append("available", !product.available);
 
-      const response = await fetch(
-        `http://localhost:5000/api/products/${product._id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
+      const response = await fetch(`${API_URL}/api/products/${product._id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: formData,
+      });
 
       const updatedProduct = await response.json();
 
@@ -262,19 +257,16 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const response = await fetch(
-        `http://localhost:5000/api/bookings/${bookingId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            status,
-          }),
+      const response = await fetch(`${API_URL}/api/bookings/${bookingId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({
+          status,
+        }),
+      });
 
       const updatedBooking = await response.json();
 
@@ -301,7 +293,7 @@ function AdminDashboard() {
       const token = localStorage.getItem("adminToken");
 
       const response = await fetch(
-        `http://localhost:5000/api/bookings/orders/${orderId}`,
+        `${API_URL}/api/bookings/orders/${orderId}`,
         {
           method: "PUT",
           headers: {
@@ -353,7 +345,7 @@ function AdminDashboard() {
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
 
-    fetch("http://localhost:5000/api/bookings", {
+    fetch(`${API_URL}/api/bookings`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -366,7 +358,7 @@ function AdminDashboard() {
         console.error("Failed to fetch bookings:", error);
       });
 
-    fetch("http://localhost:5000/api/bookings/orders", {
+    fetch(`${API_URL}/api/bookings/orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -379,7 +371,7 @@ function AdminDashboard() {
         console.error("Failed to fetch orders:", error);
       });
 
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_URL}/api/products)`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
