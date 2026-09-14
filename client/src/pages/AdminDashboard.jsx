@@ -371,7 +371,7 @@ function AdminDashboard() {
         console.error("Failed to fetch orders:", error);
       });
 
-    fetch(`${API_URL}/api/products)`)
+    fetch(`${API_URL}/api/products`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
